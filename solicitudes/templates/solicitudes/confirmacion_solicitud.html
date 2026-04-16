@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Registrada</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 60px 50px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .icon-check {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+        }
+
+        .icon-check::after {
+            content: '✓';
+            font-size: 2.2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .card h1 {
+            font-size: 1.9rem;
+            color: #111827;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 36px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 13px 32px;
+            background: linear-gradient(90deg, #1b263b, #778da9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-back:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon-check"></div>
+        <h1>Solicitud Enviada</h1>
+        <p>Su solicitud ha sido registrada correctamente. Será atendida a la brevedad posible.</p>
+        <div class="badge">Solicitud Exitosa</div>
+        <br>
+        <a href="{% url 'solicitudes:registro_solicitud' %}" class="btn-back">Registrar Nueva Solicitud</a>
+    </div>
+</body>
+</html>
