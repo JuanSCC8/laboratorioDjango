@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Solicitud</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 720px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #1b263b, #778da9);
+            padding: 30px 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .form-body {
+            padding: 36px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #111827;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f9fafb;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1b263b;
+            box-shadow: 0 0 0 3px rgba(27, 38, 59, 0.15);
+            background: #fff;
+        }
+
+        select.form-input {
+            cursor: pointer;
+        }
+
+        .form-file {
+            display: block;
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 0.9rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .form-file:hover {
+            border-color: #1b263b;
+        }
+
+        .file-hint {
+            font-size: 0.78rem;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .errorlist {
+            list-style: none;
+            margin-top: 5px;
+        }
+
+        .errorlist li {
+            color: #dc2626;
+            font-size: 0.82rem;
+            margin-top: 3px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #1b263b, #778da9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 580px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .header, .form-body {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registro de Solicitud</h1>
+            <p>Complete el formulario para registrar su solicitud</p>
+        </div>
+        <div class="form-body">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="{{ form.nombre_solicitante.id_for_label }}">Nombre del Solicitante</label>
+                        {{ form.nombre_solicitante }}
+                        {{ form.nombre_solicitante.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.documento_identidad.id_for_label }}">Documento de Identidad</label>
+                        {{ form.documento_identidad }}
+                        {{ form.documento_identidad.errors }}
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="{{ form.correo_electronico.id_for_label }}">Correo Electrónico</label>
+                        {{ form.correo_electronico }}
+                        {{ form.correo_electronico.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.telefono_contacto.id_for_label }}">Teléfono de Contacto</label>
+                        {{ form.telefono_contacto }}
+                        {{ form.telefono_contacto.errors }}
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="{{ form.tipo_solicitud.id_for_label }}">Tipo de Solicitud</label>
+                        {{ form.tipo_solicitud }}
+                        {{ form.tipo_solicitud.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.fecha_solicitud.id_for_label }}">Fecha de Solicitud</label>
+                        {{ form.fecha_solicitud }}
+                        {{ form.fecha_solicitud.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.asunto.id_for_label }}">Asunto</label>
+                    {{ form.asunto }}
+                    {{ form.asunto.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.descripcion_detallada.id_for_label }}">Descripción Detallada</label>
+                    {{ form.descripcion_detallada }}
+                    {{ form.descripcion_detallada.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.archivo_adjunto.id_for_label }}">Archivo Adjunto (Opcional)</label>
+                    {{ form.archivo_adjunto }}
+                    <p class="file-hint">Formatos permitidos: PDF, DOC, DOCX, JPG, PNG (máx. 10MB)</p>
+                    {{ form.archivo_adjunto.errors }}
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

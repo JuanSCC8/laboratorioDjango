@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaboratorioDjango</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 60%, #415a77 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: #a8b8cc;
+            font-size: 1.05rem;
+            margin-top: 10px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+            width: 300px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .card-banner {
+            height: 8px;
+        }
+
+        .card-banner.asistencia {
+            background: linear-gradient(90deg, #0f3460, #e94560);
+        }
+
+        .card-banner.solicitudes {
+            background: linear-gradient(90deg, #1b263b, #778da9);
+        }
+
+        .card-body {
+            padding: 32px 28px 36px;
+            text-align: center;
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .card-icon.asistencia {
+            background: linear-gradient(135deg, #0f3460, #e94560);
+        }
+
+        .card-icon.solicitudes {
+            background: linear-gradient(135deg, #1b263b, #778da9);
+        }
+
+        .card-body h2 {
+            font-size: 1.4rem;
+            color: #111827;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 28px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .btn.asistencia {
+            background: linear-gradient(90deg, #0f3460, #e94560);
+        }
+
+        .btn.solicitudes {
+            background: linear-gradient(90deg, #1b263b, #778da9);
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #5a7a99;
+            font-size: 0.82rem;
+        }
+
+        .admin-btn {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #d1dce8;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(6px);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .admin-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+        }
+
+        .admin-btn .icon {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'admin:index' %}" class="admin-btn">
+        <span class="icon">⚙️</span> Panel Admin
+    </a>
+
+    <div class="header">
+        <h1>LaboratorioDjango</h1>
+        <p>Selecciona el módulo que deseas utilizar</p>
+    </div>
+
+    <div class="cards">
+
+        <a href="{% url 'asistencia:registro_asistencia' %}" class="card">
+            <div class="card-banner asistencia"></div>
+            <div class="card-body">
+                <div class="card-icon asistencia">📋</div>
+                <h2>Asistencia</h2>
+                <p>Registra la asistencia del personal con hora de ingreso, salida y confirmación de presencia.</p>
+                <span class="btn asistencia">Ir a Asistencia</span>
+            </div>
+        </a>
+
+        <a href="{% url 'solicitudes:registro_solicitud' %}" class="card">
+            <div class="card-banner solicitudes"></div>
+            <div class="card-body">
+                <div class="card-icon solicitudes">📝</div>
+                <h2>Solicitudes</h2>
+                <p>Envía solicitudes académicas, administrativas, técnicas u otras con archivo adjunto opcional.</p>
+                <span class="btn solicitudes">Ir a Solicitudes</span>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="footer">LaboratorioDjango &mdash; Django 4.2 + PostgreSQL</div>
+
+</body>
+</html>
