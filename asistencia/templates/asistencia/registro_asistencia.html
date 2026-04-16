@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 680px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0f3460, #e94560);
+            padding: 30px 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .form-body {
+            padding: 36px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #111827;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f9fafb;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0f3460;
+            box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.15);
+            background: #fff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 8px;
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: #0f3460;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #0f3460;
+            text-transform: none;
+            font-weight: 600;
+        }
+
+        .errorlist {
+            list-style: none;
+            margin-top: 5px;
+        }
+
+        .errorlist li {
+            color: #dc2626;
+            font-size: 0.82rem;
+            margin-top: 3px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #0f3460, #e94560);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 560px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .header, .form-body {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registro de Asistencia</h1>
+            <p>Complete el formulario para registrar su asistencia</p>
+        </div>
+        <div class="form-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.nombre_completo.id_for_label }}">Nombre Completo</label>
+                    {{ form.nombre_completo }}
+                    {{ form.nombre_completo.errors }}
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="{{ form.documento_identidad.id_for_label }}">Documento de Identidad</label>
+                        {{ form.documento_identidad }}
+                        {{ form.documento_identidad.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.correo_electronico.id_for_label }}">Correo Electrónico</label>
+                        {{ form.correo_electronico }}
+                        {{ form.correo_electronico.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.fecha_asistencia.id_for_label }}">Fecha de Asistencia</label>
+                    {{ form.fecha_asistencia }}
+                    {{ form.fecha_asistencia.errors }}
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="{{ form.hora_ingreso.id_for_label }}">Hora de Ingreso</label>
+                        {{ form.hora_ingreso }}
+                        {{ form.hora_ingreso.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.hora_salida.id_for_label }}">Hora de Salida</label>
+                        {{ form.hora_salida }}
+                        {{ form.hora_salida.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        {{ form.presente }}
+                        <label for="{{ form.presente.id_for_label }}">Confirmar Asistencia (Presente)</label>
+                    </div>
+                    {{ form.presente.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.observaciones.id_for_label }}">Observaciones</label>
+                    {{ form.observaciones }}
+                    {{ form.observaciones.errors }}
+                </div>
+
+                <button type="submit" class="btn-submit">Registrar Asistencia</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
